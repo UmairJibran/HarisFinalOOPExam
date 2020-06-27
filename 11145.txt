@@ -1,0 +1,10 @@
+Model of the car is : BMWX1
+Brand of the car is : BMW
+Price of the car is : 22000
+Built Year of the car is : 2019
+Final Price of the car is : 112000
+
+Passenger Air Bags Included : 1
+Alloy Wheels Included : 0
+Number of AI Modules : 3
+How Many time was the gear shifted : 7

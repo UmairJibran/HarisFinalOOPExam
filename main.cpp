@@ -75,56 +75,78 @@ double calcFinalPrice(double tax, double price){
 	return (tax + price);
 }
 
-int main() {
+void write(BMW car){
   fstream myfile;
   myfile.open ("11145.txt",ios::app);
-  string model,fuelType;
-  int year;
-  double price,tax;
-  cout << "Enter Model Name: ";
-  cin >> model;
-  cout << "Enter Fuel Type: ";
-  cin >> fuelType;
-  cout << "Enter Year: ";
-  cin >> year;
-  cout << "Enter Car Price: ";
-  cin >> price;
-  tx:
-  cout << "Enter Car Tax: ";
-  cin >> tax;
-  if(tax < 25000) goto tx;
-  BMW car(model,price,year,calcFinalPrice(tax,price),fuelType);
-  cout << "Does the car have Air Bag for Passenger? ";
-  bool airbag;
-  cin >> airbag;
-  if(airbag) car.setPassengerAirBag(airbag);
-  cout << "Does the car have Alloy Wheels? ";
-  bool alloy;
-  if(alloy) car.setAlloyWheels(alloy);
-  cout << "How many AI Module does the car have? ";
-  int aim;
-  if(aim > 0) car.setNumberOfAIModules(aim);
-  cout << endl << "Shift Gear more than 3 times to save it to file";
-  int counter = 0;
-  do{
-  	if(counter < 3){
-  		cout << endl << "Press any key to shift up!";
-  		system("pause");
-  		car.shiftGear();
-  		counter+=1;
-	}else{
-		break;
-	}
-  }while(true);
   myfile << "Model of the car is : " << car.getModel() << endl;
-  myfile << "Model of the car is : " << car.getModel() << endl;
-  myfile << "Model of the car is : " << car.getModel() << endl;
-  myfile << "Model of the car is : " << car.getModel() << endl;
-  myfile << "Model of the car is : " << car.getModel() << endl;
+  myfile << "Brand of the car is : " << car.getBrand() << endl;
+  myfile << "Price of the car is : " << car.getPrice() << endl;
+  myfile << "Built Year of the car is : " << car.getYear() << endl;
+  myfile << "Final Price of the car is : " << car.getFinalPrice() << endl;
   myfile << endl;
-  myfile << "Passenger Air Bags Included : " << car.getModel() << endl;
-  myfile << "Alloy Wheels Included : " << car.getModel() << endl;
-  myfile << "Number of AI Modules : " << car.getModel() << endl;
-  myfile << "How Many time was the gear shifted : " << car.getModel() << endl;
+  myfile << "Passenger Air Bags Included : " << car.getPassengerAirBag() << endl;
+  myfile << "Alloy Wheels Included : " << car.getAlloyWheels() << endl;
+  myfile << "Number of AI Modules : " << car.getNumberOfAIModules() << endl;
+  myfile << "How Many time was the gear shifted : " << car.getGearShift() << endl;
   myfile.close();
+}
+
+int main() {
+	cout << "press 1 to write another car. or 2 to read old: ";
+	int temp;
+	cin >> temp;
+	if(temp == 1){	
+	  string model,fuelType;
+	  int year;
+	  double price,tax;
+	  cout << "Enter Model Name: ";
+	  cin >> model;
+	  cout << "Enter Fuel Type: ";
+	  cin >> fuelType;
+	  cout << "Enter Year: ";
+	  cin >> year;
+	  cout << "Enter Car Price: ";
+	  cin >> price;
+	  tx:
+	  cout << "Enter Car Tax: ";
+	  cin >> tax;
+	  if(tax < 25000) goto tx;
+	  BMW car(model,price,year,calcFinalPrice(tax,price),fuelType);
+	  int temp;
+	  cout << "Does the car have Air Bag for Passenger? ";
+	  cin >> temp;
+	  if(temp == 1) car.setPassengerAirBag(true);
+	  cout << "Does the car have Alloy Wheels? ";
+	  cin >> temp;
+	  if(temp == 1) car.setAlloyWheels(true);
+	  cout << "How many AI Module does the car have? ";
+	  int aim;
+	  cin >> aim;
+	  if(aim > 0) car.setNumberOfAIModules(aim);
+	  cout << endl << "Shift Gear more than 3 times to save it to file";
+	  int counter = 0;
+	  do{
+	  	if(counter < 3){
+	  		cout << endl << "Press any key to shift up!";
+	  		system("pause");
+	  		car.shiftGear();
+	  		counter+=1;
+		}else{
+			int temp;
+			cout << "Press 1 for another shift or 0 for no shift";
+			cin >> temp;
+			if(temp == 1) car.shiftGear();
+			else break;
+		}
+	  }while(true);
+	  write(car);
+	}else{
+	  string line;
+	  fstream myfile;
+	  myfile.open ("11145.txt");
+	  while ( getline (myfile,line) )    {
+	      cout << line << '\n';
+	  }
+	  myfile.close();
+	}
 }
